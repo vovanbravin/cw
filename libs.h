@@ -70,6 +70,11 @@ typedef struct
     int mode;
 }ExchangeParams;
 
+typedef struct 
+{
+    Point left_up, right_down;
+}FragmentParams;
+
 
 
 #define ERROR_OPEN_FILE "Сouldn't open %s.\n"

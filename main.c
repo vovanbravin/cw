@@ -1,6 +1,15 @@
 #include "libs.h"
 #include "bmp.h"
 
+void help()
+{
+    printf("Course work for option 5.3, created by Vladimir Brovin\n");
+    printf("The first function is the RGB filter component.The flag for performing this operation is `--rgbfilter'.\nThis tool should allow you to either set the value of a given component for the entire image in the range from 0 to 255.\n");
+    printf("The second function is Drawing a square. Flag for performing this operation: `--square`.\n");
+    printf("The third function is to swap 4 pieces of the area. The flag for performing this operation is `--exchange'.\nThe rectangular area selected by the user is divided into 4 parts and these parts are swapped.\n");
+    printf("The fourth function: Finds the most common color and replaces it with another preset color.\nThe flag for performing this operation is `--freq_color'.\n");
+}       
+
 
 int main(int agrc, char * agrs[])
 {
@@ -157,6 +166,10 @@ int main(int agrc, char * agrs[])
         case 'T':
             if(!to_exchange_type(&exchange_params->mode, optarg))
                 return 41;
+            break;
+        case 'h':
+            help();
+            return 0;
             break;
         default:
             break;

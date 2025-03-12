@@ -181,6 +181,34 @@ void freq_color(int red, int green, int blue, BMP * bmp)
     free(colors);
 }
 
+void swap_fragment(FragmentParams * first_fragment, FragmentParams * second_fragment, BMP * bmp)
+{
+    int rowSizeBmp = ((bmp->BMPInfoHeader->biWidth * + 3) / 4) * 4;
+
+
+    int width = first_fragment->left_up.x - first_fragment->right_down.x;
+    int height = first_fragment->right_down.y - first_fragment->left_up.y;
+    int rowSizeTmp = width * 3 + 3;
+    uint8_t * pixels_tmp = malloc(rowSizeTmp * height);
+    
+    for(int y = first_fragment->left_up.y, j = 0; y < first_fragment->right_down.y && j < height;y++, j++)
+    {
+        for(int x = first_fragment->left_up.x, i = 0; x < first_fragment->right_down.x && i < width;x++, i++)
+        {
+            uint8_t * pixel_bmp = &bmp->pixels[y * rowSizeBmp + x * 3];
+            uint8_t * pixel_tmp = &pixels_tmp[j * rowSizeTmp + i * 3];
+            pixel_tmp[0] = pixel_bmp[0];
+            pixel_tmp[1] = pixel_bmp[1];
+            pixel_tmp[2] = pixel_bmp[2];
+        }
+    }
+}
+
+bool exchange(ExchangeParams *exchange_params, BMP *bmp)
+{
+    
+}
+
 bool ckeck_correct_component_name(const char *component_name)
 {
     if(strcmp(component_name, "red") == 0 || strcmp(component_name, "blue") == 0 || strcmp(component_name, "green") == 0)
